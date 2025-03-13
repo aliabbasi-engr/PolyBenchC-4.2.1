@@ -84,6 +84,8 @@ void kernel_gesummv(int n,
   {
     tmp[i] = SCALAR_VAL(0.0);
     y[i] = SCALAR_VAL(0.0);
+    printf("0 %llx R\n", (unsigned long long)(uintptr_t)&tmp[i]);
+    printf("0 %llx R\n", (unsigned long long)(uintptr_t)&y[i]);
     for (j = 0; j < _PB_N; j++)
 	  {
 	    tmp[i] = A[i][j] * x[j] + tmp[i];

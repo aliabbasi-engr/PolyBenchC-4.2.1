@@ -87,25 +87,25 @@ void kernel_mvt(int n,
 #pragma scop
   for (i = 0; i < _PB_N; i++)
   {
+    printf("0 %llx R\n", (unsigned long long)(uintptr_t)&x1[i]);
     for (j = 0; j < _PB_N; j++)
     {
       x1[i] = x1[i] + A[i][j] * y_1[j];
-      printf("0 %llx R\n", (unsigned long long)(uintptr_t)&x1[i]);
       printf("0 %llx R\n", (unsigned long long)(uintptr_t)&A[i][j]);
       printf("0 %llx R\n", (unsigned long long)(uintptr_t)&y_1[j]);
-      printf("0 %llx W\n", (unsigned long long)(uintptr_t)&x1[i]);
     }
+    printf("0 %llx W\n", (unsigned long long)(uintptr_t)&x1[i]);
   }
   for (i = 0; i < _PB_N; i++)
   {
+    printf("0 %llx R\n", (unsigned long long)(uintptr_t)&x2[i]);
     for (j = 0; j < _PB_N; j++)
     {
       x2[i] = x2[i] + A[j][i] * y_2[j];
-      printf("0 %llx R\n", (unsigned long long)(uintptr_t)&x2[i]);
       printf("0 %llx R\n", (unsigned long long)(uintptr_t)&A[j][i]);
       printf("0 %llx R\n", (unsigned long long)(uintptr_t)&y_2[j]);
-      printf("0 %llx W\n", (unsigned long long)(uintptr_t)&x2[i]);
     }
+    printf("0 %llx W\n", (unsigned long long)(uintptr_t)&x2[i]);
   }
 #pragma endscop
 

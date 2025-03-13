@@ -100,11 +100,12 @@ void kernel_symm(int m, int n,
         for (k = 0; k < i; k++)
         {
            C[k][j] += alpha*B[i][j] * A[i][k];
+           printf("0 %llx R\n", (unsigned long long)(uintptr_t)&C[k][j]);
            printf("0 %llx R\n", (unsigned long long)(uintptr_t)&A[i][k]);
+           printf("0 %llx W\n", (unsigned long long)(uintptr_t)&C[k][j]);
            temp2 += B[k][j] * A[i][k];
            printf("0 %llx R\n", (unsigned long long)(uintptr_t)&B[k][j]);
         }
-        printf("0 %llx W\n", (unsigned long long)(uintptr_t)&C[k][j]);
         C[i][j] = beta * C[i][j] + alpha*B[i][j] * A[i][i] + alpha * temp2;
         printf("0 %llx R\n", (unsigned long long)(uintptr_t)&C[i][j]);
         printf("0 %llx W\n", (unsigned long long)(uintptr_t)&C[i][j]);
