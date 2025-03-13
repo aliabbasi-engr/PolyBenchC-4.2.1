@@ -90,7 +90,10 @@ void kernel_3mm(int ni, int nj, int nk, int nl, int nm,
 	    for (k = 0; k < _PB_NK; ++k)
       {
 	      E[i][j] += A[i][k] * B[k][j];
+        printf("0 %llx R\n", (unsigned long long)(uintptr_t)&A[i][k]);
+        printf("0 %llx R\n", (unsigned long long)(uintptr_t)&B[k][j]);
       }
+      printf("0 %llx W\n", (unsigned long long)(uintptr_t)&E[i][j]);
     }
   }
   /* F := C*D */
@@ -102,7 +105,10 @@ void kernel_3mm(int ni, int nj, int nk, int nl, int nm,
 	    for (k = 0; k < _PB_NM; ++k)
       {
 	      F[i][j] += C[i][k] * D[k][j];
+        printf("0 %llx R\n", (unsigned long long)(uintptr_t)&C[i][k]);
+        printf("0 %llx R\n", (unsigned long long)(uintptr_t)&D[k][j]);
       }
+      printf("0 %llx W\n", (unsigned long long)(uintptr_t)&F[i][j]);
     }
   }
   /* G := E*F */
@@ -114,7 +120,10 @@ void kernel_3mm(int ni, int nj, int nk, int nl, int nm,
     	for (k = 0; k < _PB_NJ; ++k)
       {
     	  G[i][j] += E[i][k] * F[k][j];
+        printf("0 %llx R\n", (unsigned long long)(uintptr_t)&E[i][k]);
+        printf("0 %llx R\n", (unsigned long long)(uintptr_t)&F[k][j]);
       }
+      printf("0 %llx W\n", (unsigned long long)(uintptr_t)&G[i][j]);
     }
   }
 #pragma endscop

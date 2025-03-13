@@ -91,12 +91,17 @@ void kernel_gemm(int ni, int nj, int nk,
     for (j = 0; j < _PB_NJ; j++)
     {
 	    C[i][j] *= beta;
+      printf("0 %llx W\n", (unsigned long long)(uintptr_t)&C[i][j]);
     }
     for (k = 0; k < _PB_NK; k++)
     {
+      printf("0 %llx R\n", (unsigned long long)(uintptr_t)&A[i][k]);
       for (j = 0; j < _PB_NJ; j++)
       {
 	      C[i][j] += alpha * A[i][k] * B[k][j];
+        printf("0 %llx R\n", (unsigned long long)(uintptr_t)&C[i][j]);
+        printf("0 %llx R\n", (unsigned long long)(uintptr_t)&B[k][j]);
+        printf("0 %llx W\n", (unsigned long long)(uintptr_t)&C[i][j]);
       }
     }
   }

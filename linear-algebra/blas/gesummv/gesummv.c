@@ -87,9 +87,14 @@ void kernel_gesummv(int n,
     for (j = 0; j < _PB_N; j++)
 	  {
 	    tmp[i] = A[i][j] * x[j] + tmp[i];
+      printf("0 %llx R\n", (unsigned long long)(uintptr_t)&A[i][j]);
+      printf("0 %llx R\n", (unsigned long long)(uintptr_t)&x[j]);
+
 	    y[i] = B[i][j] * x[j] + y[i];
+      printf("0 %llx R\n", (unsigned long long)(uintptr_t)&B[i][j]);
 	  }
     y[i] = alpha * tmp[i] + beta * y[i];
+    printf("0 %llx W\n", (unsigned long long)(uintptr_t)&y[i]);
   }
 #pragma endscop
 

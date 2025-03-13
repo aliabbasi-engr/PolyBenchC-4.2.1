@@ -87,11 +87,15 @@ void kernel_trmm(int m, int n,
   {
      for (j = 0; j < _PB_N; j++)
      {
+        printf("0 %llx R\n", (unsigned long long)(uintptr_t)&B[i][j]);
         for (k = i+1; k < _PB_M; k++)
         {
            B[i][j] += A[k][i] * B[k][j];
+           printf("0 %llx R\n", (unsigned long long)(uintptr_t)&A[k][i]);
+           printf("0 %llx R\n", (unsigned long long)(uintptr_t)&B[k][j]);
         }
         B[i][j] = alpha * B[i][j];
+        printf("0 %llx W\n", (unsigned long long)(uintptr_t)&B[i][j]);
      }
   }
 #pragma endscop

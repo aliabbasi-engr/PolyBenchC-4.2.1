@@ -28,6 +28,7 @@
 # define POLYBENCH_H
 
 # include <stdlib.h>
+#include <stdint.h>
 
 /* Array padding. By default, none is used. */
 # ifndef POLYBENCH_PADDING_FACTOR

@@ -74,17 +74,27 @@ void kernel_atax(int m, int n,
   for (i = 0; i < _PB_N; i++)
   {
     y[i] = 0;
+    printf("0 %llx W\n", (unsigned long long)(uintptr_t)&y[i]);
   }
   for (i = 0; i < _PB_M; i++)
   {
     tmp[i] = SCALAR_VAL(0.0);
+    printf("0 %llx W\n", (unsigned long long)(uintptr_t)&tmp[i]);
     for (j = 0; j < _PB_N; j++)
     {
 	    tmp[i] = tmp[i] + A[i][j] * x[j];
+      printf("0 %llx R\n", (unsigned long long)(uintptr_t)&tmp[i]);
+      printf("0 %llx R\n", (unsigned long long)(uintptr_t)&A[i][j]);
+      printf("0 %llx R\n", (unsigned long long)(uintptr_t)&x[j]);
+      printf("0 %llx W\n", (unsigned long long)(uintptr_t)&tmp[i]);
     }
     for (j = 0; j < _PB_N; j++)
     {
 	    y[j] = y[j] + A[i][j] * tmp[i];
+      printf("0 %llx R\n", (unsigned long long)(uintptr_t)&y[j]);
+      printf("0 %llx R\n", (unsigned long long)(uintptr_t)&A[i][j]);
+      printf("0 %llx R\n", (unsigned long long)(uintptr_t)&tmp[i]);
+      printf("0 %llx W\n", (unsigned long long)(uintptr_t)&y[j]);
     }
   }
 #pragma endscop

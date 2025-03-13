@@ -94,7 +94,10 @@ void kernel_2mm(int ni, int nj, int nk, int nl,
 	    for (k = 0; k < _PB_NK; ++k)
 	    {
         tmp[i][j] += alpha * A[i][k] * B[k][j];
+        printf("0 %llx R\n", (unsigned long long)(uintptr_t)&A[i][k]);
+        printf("0 %llx R\n", (unsigned long long)(uintptr_t)&B[k][j]);
       }
+      printf("0 %llx W\n", (unsigned long long)(uintptr_t)&tmp[i][j]);
     }
   }
   for (i = 0; i < _PB_NI; i++)
@@ -105,7 +108,10 @@ void kernel_2mm(int ni, int nj, int nk, int nl,
 	    for (k = 0; k < _PB_NJ; ++k)
       {
 	      D[i][j] += tmp[i][k] * C[k][j];
+        printf("0 %llx R\n", (unsigned long long)(uintptr_t)&tmp[i][k]);
+        printf("0 %llx R\n", (unsigned long long)(uintptr_t)&C[k][j]);
       }
+      printf("0 %llx W\n", (unsigned long long)(uintptr_t)&D[i][j]);
     }
   }
 #pragma endscop

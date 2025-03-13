@@ -100,31 +100,48 @@ void kernel_gemver(int n,
 
   for (i = 0; i < _PB_N; i++)
   {
+    printf("0 %llx R\n", (unsigned long long)(uintptr_t)&u1[i]);
+    printf("0 %llx R\n", (unsigned long long)(uintptr_t)&u2[i]);
     for (j = 0; j < _PB_N; j++)
     {
       A[i][j] = A[i][j] + u1[i] * v1[j] + u2[i] * v2[j];
+      printf("0 %llx R\n", (unsigned long long)(uintptr_t)&A[i][j]);
+      printf("0 %llx R\n", (unsigned long long)(uintptr_t)&v1[j]);
+      printf("0 %llx R\n", (unsigned long long)(uintptr_t)&v2[j]);
+      printf("0 %llx W\n", (unsigned long long)(uintptr_t)&A[i][j]);
     }
   }
 
   for (i = 0; i < _PB_N; i++)
   {
+    printf("0 %llx R\n", (unsigned long long)(uintptr_t)&x[i]);
     for (j = 0; j < _PB_N; j++)
     {
       x[i] = x[i] + beta * A[j][i] * y[j];
+      printf("0 %llx R\n", (unsigned long long)(uintptr_t)&A[j][i]);
+      printf("0 %llx R\n", (unsigned long long)(uintptr_t)&y[j]);
     }
+    printf("0 %llx W\n", (unsigned long long)(uintptr_t)&x[i]);
   }
 
   for (i = 0; i < _PB_N; i++)
   {
     x[i] = x[i] + z[i];
+    printf("0 %llx R\n", (unsigned long long)(uintptr_t)&x[i]);
+    printf("0 %llx R\n", (unsigned long long)(uintptr_t)&z[i]);
+    printf("0 %llx W\n", (unsigned long long)(uintptr_t)&x[i]);
   }
 
   for (i = 0; i < _PB_N; i++)
   {
+    printf("0 %llx R\n", (unsigned long long)(uintptr_t)&w[i]);
     for (j = 0; j < _PB_N; j++)
     {
       w[i] = w[i] +  alpha * A[i][j] * x[j];
+      printf("0 %llx R\n", (unsigned long long)(uintptr_t)&A[i][j]);
+      printf("0 %llx R\n", (unsigned long long)(uintptr_t)&x[j]);
     }
+    printf("0 %llx W\n", (unsigned long long)(uintptr_t)&w[i]);
   }
 
 #pragma endscop
